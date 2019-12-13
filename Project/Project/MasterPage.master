@@ -1,0 +1,100 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <link href="project.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>   
+    <style type="text/css">
+        .auto-style3 {
+            width: 100%;
+            height: 35px;            
+        }
+        .auto-style4 {
+            text-decoration: none;
+            color: #FFFFFF;
+        }
+        .style6 {
+            text-decoration: none;
+            color: #ff0000;
+        }
+        .auto-style5 {
+            width: 767px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="container">
+            <div id="login"> 
+                <a href="GioHang3.aspx"><asp:Label ID="lblGioHang" runat="server" Text="" CssClass="style6"> </asp:Label></a>
+                <asp:Label ID="lblUser" runat="server" Text=""> </asp:Label>              
+                <a href="dangxuat.aspx"> <asp:Label ID="lblLogout" runat="server" Text="" CssClass="style6"></asp:Label> </a>
+                <a href="dangnhap.aspx"> <asp:Label ID="lblLogin" runat="server" Text="Đăng Nhập" CssClass="style6"> </asp:Label> </a>
+            </div>
+            <div id="banner">
+                <img src="images/LibraryBanner.jpg" />
+            </div>
+            <div id="menu">
+                <ul>
+                    <li> <a href="Trangchu.aspx">Trang Chủ</a> </li>
+                    <li>  <a href="Sanpham.aspx">Sách</a> </li>
+                    <li> <a href="Tacgia.aspx">Tác Giả</a></li>
+                    <li> <a href="#">Hỗ Trợ</a></li>
+                </ul>
+            </div>
+            <div id="left">
+                <h2>Thể Loại sách</h2>
+                <asp:DataList ID="DataList1" runat="server" >
+                    <ItemTemplate> 
+                        <table align="center" class="auto-style3">
+                            <tr>
+                                <td class="auto-style2" style="border: thin solid #FFFFFF; background-color: #000000">
+                                    <asp:LinkButton ID="LinkButton1" runat="server" CssClass="auto-style4" CommandArgument='<%# Eval("id_loai") %>' Text='<%# Eval("TenLoai") %>' OnClick="LinkButton1_Click"></asp:LinkButton>
+                                </td>
+                            </tr>
+                        </table>                      
+                    </ItemTemplate>
+                </asp:DataList>
+                &nbsp;&nbsp;&nbsp;
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Loai]"></asp:SqlDataSource>
+            </div>
+            <div id="right">
+                <div id="breadrum">
+                    <marquee id="breadcrum " behavior="scroll" 1 scrollamount="2" scrolldelay="1" onmouseover="this.stop()" onmouseout="this.start()" class="auto-style5">Chào mừng bạn đến với thư viện Duy Tân</marquee>
+                    <asp:TextBox ID="txtTimKiem" runat="server" Height="26px" Width="257px"></asp:TextBox>
+                    <asp:Button ID="btn_timkiem" runat="server" Height="26px" Text="TÌM KIẾM" Width="126px" OnClick="btn_timkiem_Click" />
+                </div>
+                <div id="content">
+                     <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+                            
+                     </asp:ContentPlaceHolder>
+                </div>
+            </div>
+            
+        </div>
+
+    </form>
+  <script src="https://static.landbot.io/landbot-widget/landbot-widget-1.0.0.js"></script>
+<script>
+  var myLandbot = new LandbotLivechat({
+    index: 'https://landbot.io/u/H-317057-V8G5N2PNKOS579AE/index.html',
+  });
+</script><script>
+  // Show a proactive message on landbot load
+  myLandbot.on('landbot-load', function() {
+    myLandbot.sendProactive({
+  "message": "What do you support ?",
+  "author": "Duy Tân ChatBot",
+  "avatar": "https://media3.giphy.com/media/a5viI92PAF89q/giphy.gif",
+  "extra": {
+    "hide_textbox": true
+  }
+});
+  });
+</script>
+    </body>
+</html>
